@@ -29,7 +29,6 @@ let currentScanStatus: ScanStatus = {
 };
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-    // 1. Dapatkan token JWT (termasuk access token)
     const token = await getToken({ req, secret: process.env.NEXTAUTH_SECRET });
 
     if (!token || !token.accessToken) {
@@ -47,9 +46,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         return res.status(500).json({ error: 'YOUTUBE_CHANNEL_ID environment variable is not set.' });
     }
 
-    // 2. Handle GET request untuk status
     if (req.method === 'GET') {
-        // Hitung durasi jika sedang berjalan
         let duration = null;
         if (currentScanStatus.isRunning && currentScanStatus.startTime) {
             duration = Math.round((Date.now() - currentScanStatus.startTime) / 1000); // dalam detik
@@ -57,13 +54,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         return res.status(200).json({ ...currentScanStatus, duration });
     }
 
-    // 3. Handle POST request untuk memulai scan
     if (req.method === 'POST') {
         if (currentScanStatus.isRunning) {
             return res.status(409).json({ error: 'Scan is already in progress.' });
         }
 
-        // Reset status dan mulai scan di latar belakang
         currentScanStatus = {
             isRunning: true,
             message: 'Initializing scan...',
@@ -76,10 +71,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             startTime: Date.now(),
         };
 
-        // Kirim respons cepat ke client bahwa scan dimulai
         res.status(202).json({ message: 'Scan initiated.' });
 
-        // --- Mulai Proses Asinkron ---
         (async () => {
             try {
                 const statusCallback = (message: string) => {
@@ -135,9 +128,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                 console.log(`Scan finished. Final Status: ${currentScanStatus.message}`);
             }
         })();
-        // --- Akhir Proses Asinkron ---
 
-        return; // Fungsi handler API selesai di sini
+        return;
     }
 
     // Jika bukan GET atau POST
