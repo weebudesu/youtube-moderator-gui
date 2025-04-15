@@ -1,21 +1,47 @@
-Buat kalian yang resah akan komen judol.
+# YouTube Moderator GUI
 
-## Yang perlu di install
-1. Node.js
-2. npm atau yarn
+**Buat kalian yang resah dengan komentar "judol" di YouTube, proyek ini hadir untuk membantu!**  
+Aplikasi antarmuka grafis sederhana untuk memoderasi komentar dengan lebih nyaman.
 
-## Cara pakai
+## Fitur
+- Antarmuka GUI berbasis web
+- Mudah digunakan untuk siapa saja
+- Dirancang untuk menangani komentar-komentar judol
 
-1. pertama clone repo ini di pc kalian, trus cd ke youtube-moderator-gui.
+## Prasyarat
 
-2. install dependensi dengan npm install atau yarn install.
+Sebelum mulai, pastikan kamu sudah menginstal:
 
-3. salin atau rename .env.local.example ke .env.local, trus edit isinya.
+- [Node.js](https://nodejs.org/)
+- `npm` **atau** `yarn`
 
-4. setelah semua sudah di setup tinggal jalankan dengan npm run dev.
+## Cara Menggunakan
 
-## SS
+1. **Clone repositori ini**  
+   ```bash
+   git clone https://github.com/weebudesu/youtube-moderator-gui.git
+   cd youtube-moderator-gui
+   ```
 
-![SS 1](/ss/Screenshot-1.png)
-![SS 2](/ss/Screenshot-2.png)
+2. **Instal dependensi**  
+   ```bash
+   npm install
+   # atau
+   yarn install
+   ```
+
+3. **Siapkan konfigurasi environment**  
+   Salin atau ubah nama file `.env.local.example` menjadi `.env.local`, lalu sesuaikan isinya dengan konfigurasi kamu.
+
+4. **Jalankan aplikasi**  
+   ```bash
+   npm run dev
+   ```
+
+   Setelah itu buka browser dan akses `http://localhost:3000` (default).
+
+## Screenshot
+
+![SS 1](/ss/Screenshot-1.png)  
+![SS 2](/ss/Screenshot-2.png)  
 ![SS 3](/ss/Screenshot-3.png)
